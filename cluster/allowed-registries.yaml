@@ -1,0 +1,17 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAllowedRepos
+metadata:
+  name: frontend-only-repos
+  annotations:
+    configmanagement.gke.io/cluster-selector: selector-env-finland
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces:
+      - "bank"
+  parameters:
+    repos:
+      - "gcr.io/bank-of-anthos"
+      - "docker.io/istio"
